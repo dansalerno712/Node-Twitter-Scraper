@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/dansalerno712/Node-Twitter-Scraper#readme",
   "dependencies": {
+    "chunk-date-range": "^0.1.0",
+    "dateformat": "^3.0.3",
     "puppeteer": "^1.3.0"
   }
 }
