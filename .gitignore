@@ -1,3 +1,6 @@
+#csv files
+*.csv
+
 #jshint config
 .jshintrc
 
