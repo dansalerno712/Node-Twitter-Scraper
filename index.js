@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const chunk = require('chunk-date-range');
 const dateformat = require('dateformat');
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 /*
  * Function that scrapes all the tweets from a single twitter advanced search and outputs them to the console
@@ -11,6 +12,9 @@ const dateformat = require('dateformat');
  * @return: nothing yet
  */
 async function run(query, startDate, endDate, chunks) {
+    // hold results to output to csv
+    let ret = [];
+
     // make sure we encode the query correctly for URLs
     let encodedQuery = encodeURI(query);
 
@@ -90,8 +94,8 @@ async function run(query, startDate, endDate, chunks) {
             return ret;
         });
 
-        //print to console
-        console.log(tweets);
+        //add to csv
+        ret.push(tweets);
 
         //close the page
         await page.close();
@@ -99,6 +103,43 @@ async function run(query, startDate, endDate, chunks) {
 
     //exit the browser
     await browser.close();
+
+    // collapse into one array and output to CSV
+    toCSV([].concat.apply([], ret));
+}
+
+/*
+ * Function to write an array of tweets to a csv
+ * @input: tweets: An array of tweet objects
+ * @return: Nothing, but a csv is created
+ */
+function toCSV(tweets) {
+    // create header schema
+    const csvWriter = createCsvWriter({
+        path: "output.csv",
+        header: [{
+            id: "text",
+            title: "Text"
+        }, {
+            id: "timestamp",
+            title: "Timestamp"
+        }, {
+            id: "id",
+            title: "ID"
+        }, {
+            id: "retweets",
+            title: "Retweets"
+        }, {
+            id: "likes",
+            title: "Likes"
+        }]
+    });
+
+    // output to csv
+    csvWriter.writeRecords(tweets)
+        .then(() => {
+            console.log("Done writing to csv");
+        });
 }
 
 /*
@@ -154,4 +195,4 @@ function autoScroll(page) {
     });
 }
 
-run("chocolate covered almonds", "2018-04-14", "2018-04-17", "day");
+run("chocolate covered almonds", "2018-04-13", "2018-04-17", "day");
