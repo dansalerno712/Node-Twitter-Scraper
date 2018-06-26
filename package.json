@@ -2,7 +2,7 @@
   "name": "node-twitter-scraper",
   "version": "1.0.0",
   "description": "Scraping twitter with chrome headless and puppeteer",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,7 @@
     "chunk-date-range": "^0.1.0",
     "csv-writer": "^1.0.0",
     "dateformat": "^3.0.3",
+    "express": "^4.16.3",
     "jshint-esnext": "^2.7.0-3",
     "puppeteer": "^1.3.0"
   }

@@ -6,12 +6,13 @@ module.exports = {
     /*
      * Function to write an array of tweets to a csv
      * @input: tweets: An array of tweet objects
+     * @input: path: A string of the path to save the csv at
      * @return: Nothing, but a csv is created
      */
-    "toCSV": function(tweets) {
+    "toCSV": function(tweets, path) {
         // create header schema
         const csvWriter = createCsvWriter({
-            path: "output.csv",
+            path: path,
             header: [{
                 id: "text",
                 title: "Text"

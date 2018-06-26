@@ -5,12 +5,12 @@ const splitDateRange = helpers.splitDateRange;
 const autoScroll = helpers.autoScroll;
 
 /*
- * Function that scrapes all the tweets from a single twitter advanced search and outputs them to the console
+ * Function that scrapes all the tweets from a single twitter advanced search and returns them
  * @input query: The search query
  * @input startDate: Starting date in the format "YYYY-MM-DD"
  * @input endDate: Ending date in the format "YYYY-MM-DD"
  *
- * @return: nothing yet
+ * @return: An array of Tweet objects that contain tweet text, id, timestamp, date, likes, retweets
  */
 async function run(query, startDate, endDate, chunks) {
     // hold results to output to csv
@@ -31,7 +31,7 @@ async function run(query, startDate, endDate, chunks) {
 
     //make and launch a new page
     const browser = await puppeteer.launch({
-        headless: false
+        headless: true
     });
 
     for (i = 0; i < urls.length; i += 1) {
@@ -105,8 +105,8 @@ async function run(query, startDate, endDate, chunks) {
     //exit the browser
     await browser.close();
 
-    // collapse into one array and output to CSV
-    toCSV([].concat.apply([], ret));
+    // collapse into one array and return
+    return [].concat.apply([], ret);
 }
 
-run("chocolate covered almonds", "2018-01-01", "2018-04-17", "month");
+module.exports.run = run;
