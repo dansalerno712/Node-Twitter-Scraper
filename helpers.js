@@ -1,8 +1,38 @@
 const chunk = require('chunk-date-range');
 const dateformat = require('dateformat');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const nodemailer = require('nodemailer');
 
 module.exports = {
+    /**
+     * Sends an email containing the download link for the tweet csv
+     * @param  {string} toEmail Email to send to
+     * @param  {string} link    Link to download the csv
+     */
+    "sendEmail": function(toEmail, link) {
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: "<email>",
+                pass: "<password>"
+            }
+        });
+
+        var mailOptions = {
+            from: "<email>",
+            to: toEmail + "",
+            subject: "Your Tweet Download Link",
+            text: link + ""
+        };
+
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                throw error
+            } else {
+                console.log("Email sent: " + info.response);
+            }
+        });
+    },
     /*
      * Function to write an array of tweets to a csv
      * @input: tweets: An array of tweet objects

@@ -1,3 +1,6 @@
+#data directory
+/data
+
 #csv files
 *.csv
 
