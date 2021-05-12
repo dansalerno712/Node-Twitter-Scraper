@@ -22,7 +22,7 @@
     "csv-writer": "^1.0.0",
     "dateformat": "^3.0.3",
     "express": "^4.16.3",
-    "mongodb": "^3.0.10",
+    "mongodb": "^3.1.13",
     "mysql2": "^1.5.3",
     "nodemailer": "^6.4.16",
     "puppeteer": "^1.18.1",
