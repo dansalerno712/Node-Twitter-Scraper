@@ -21,7 +21,7 @@
     "chunk-date-range": "^0.1.0",
     "csv-writer": "^1.0.0",
     "dateformat": "^3.0.3",
-    "express": "^4.16.3",
+    "express": "^4.18.2",
     "mongodb": "^3.1.13",
     "mysql2": "^1.5.3",
     "nodemailer": "^6.4.16",
